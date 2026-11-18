@@ -1,14 +1,15 @@
-# Design direction — Field Manual Index
+# Design direction — Military Strategy Database
 
-The interface feels like a well-used field manual: olive ink, warm paper,
-registration marks, map-grid lines, and precise monospace labels. The page is
-an index first, with the reference record opening beside it rather than a
-generic hero followed by cards.
+A scoped study reference of six self-authored records. Since 2026-11-19 the site uses the shared **Reader
+shell** (see `READER.md`): `app/reader-shell.css`, `components/reader-shell.tsx` and
+`tests/reader-shell.test.tsx` are copied byte for byte from content-techblog-web. Geist via `next/font`
+(variable on `<html>`), `--rs-*` tokens in light and dark; no site colour tokens remain.
 
-- Palette: paper `#f2efe5`, ink `#1c241c`, olive `#65734d`, rust `#a34f32`.
-- Typography: monospace for coordinates and labels; sturdy sans for reading.
-- Structure: left rail for filters, dense index table, right-side selected brief.
-- Interaction: selecting a record updates the brief without losing the index.
-- Responsive rule: the rail becomes a horizontal filter strip and the brief
-  follows the selected record on small screens.
-- Motion: one map-grid reveal on load; selection changes use a short ink-fade.
+- Structure: one h1 and lede, a live search (not a form, so the query never leaves the browser), era chips
+  (`aria-pressed`) whose counts follow the search, a `role="status"` count, then every record with its
+  objective, constraint and lesson in place. Nothing opens at the end of the page.
+- Empty state: "No records match" with a Show all records button that clears both the search and the era.
+- Floor: text ≥ 12px, controls ≥ 44px, 4.5:1 text contrast, forced colours, no horizontal scroll at 320px,
+  footer link back to https://bookchaowalit.com/.
+- Honesty: educational reference and sample dataset; not operational guidance, a field manual, or a complete
+  historical archive.
