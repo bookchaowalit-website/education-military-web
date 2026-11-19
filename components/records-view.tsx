@@ -30,7 +30,8 @@ export function RecordsView() {
           <div className="rs-section-head"><h2 id="records">Records</h2></div>
           <div className="rs-toolbar" ref={toolbarRef}>
             <SearchForm label="Find a record" placeholder="Title, theatre or tag" value={query} onValueChange={setQuery} onClear={() => setQuery("")} />
-            <ul className="site-chips" aria-label="Filter by era">
+            {/* role="list": .site-chips sets list-style: none, which makes Safari drop the list (and its name) for VoiceOver. */}
+            <ul className="site-chips" role="list" aria-label="Filter by era">
               {eras.map((item) => (
                 <li key={item}>
                   <button type="button" className="rs-chip" aria-pressed={era === item} onClick={() => setEra(item)}>

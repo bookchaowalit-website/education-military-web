@@ -67,6 +67,13 @@ describe("home page (mounted)", () => {
   });
 });
 
+describe("era filter group", () => {
+  it("keeps its list role and name in Safari/VoiceOver (list-style: none drops list semantics without role=list)", () => {
+    const html = renderToString(<Home />);
+    expect(html).toMatch(/<ul class="site-chips" role="list" aria-label="Filter by era">/);
+  });
+});
+
 describe("site files", () => {
   it("points robots and the sitemap at military.bookchaowalit.com and redirects /more-projects", async () => {
     expect(robots().sitemap).toBe("https://military.bookchaowalit.com/sitemap.xml");
