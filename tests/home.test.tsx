@@ -62,6 +62,8 @@ describe("home page (mounted)", () => {
     press(button("Show all records"));
     expect(titles()).toHaveLength(6);
     expect(button("All eras").getAttribute("aria-pressed")).toBe("true");
+    // The pressed button left with the empty state: focus goes back to the search field, like Clear.
+    expect(document.activeElement).toBe(search());
   });
 });
 

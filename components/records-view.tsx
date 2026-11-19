@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { EmptyState, Reader, ReaderFoot, ReaderHead, ReaderTop, ResultCount, SearchForm, Tags } from "@/components/reader-shell";
 import { ALL_ERAS, eras, filterRecords, records } from "@/lib/military";
 
@@ -12,6 +12,8 @@ const SOURCE = "https://github.com/bookchaowalit-website/education-military-web"
 export function RecordsView() {
   const [era, setEra] = useState(ALL_ERAS);
   const [query, setQuery] = useState("");
+  // "Show all" leaves with the empty state it sits in, so it puts focus back in the search field, like Clear.
+  const toolbarRef = useRef<HTMLDivElement>(null);
   const matching = filterRecords(records, ALL_ERAS, query);
   const shown = filterRecords(records, era, query);
   const q = query.trim();
@@ -26,7 +28,7 @@ export function RecordsView() {
         />
         <section aria-labelledby="records">
           <div className="rs-section-head"><h2 id="records">Records</h2></div>
-          <div className="rs-toolbar">
+          <div className="rs-toolbar" ref={toolbarRef}>
             <SearchForm label="Find a record" placeholder="Title, theatre or tag" value={query} onValueChange={setQuery} onClear={() => setQuery("")} />
             <ul className="site-chips" aria-label="Filter by era">
               {eras.map((item) => (
@@ -43,7 +45,7 @@ export function RecordsView() {
             <EmptyState
               title="No records match"
               headingLevel={3}
-              action={<button type="button" className="rs-plain" onClick={() => { setQuery(""); setEra(ALL_ERAS); }}>Show all records</button>}
+              action={<button type="button" className="rs-plain" onClick={() => { setQuery(""); setEra(ALL_ERAS); toolbarRef.current?.querySelector<HTMLInputElement>('input[type="search"]')?.focus(); }}>Show all records</button>}
             >
               Try a broader word, or another era.
             </EmptyState>
