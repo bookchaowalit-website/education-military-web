@@ -48,7 +48,7 @@ export function RecordsView() {
               Try a broader word, or another era.
             </EmptyState>
           ) : (
-            <ul className="rs-list">
+            <ul className="rs-list" role="list">
               {shown.map((record) => (
                 <li key={record.id}>
                   <article className="rs-entry">
